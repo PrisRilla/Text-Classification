@@ -1,14 +1,11 @@
 import math
 def clean_text(txt):
-        """returns a list containing the words in txt after it has been
-        “cleaned”;used when you need to process each word in a text individually, without having to worry about
-        punctuation or special characters.
+        """Preprocess text
         """
         return txt.replace('.','').replace('.','').replace('?','').lower()
 
 def sample_file_write(filename):
-    """A function that demonstrates how to write a
-       Python dictionary to an easily-readable file.
+    """A function that writes a Python dictionary into an easily-readable file
     """
     d = {'test': 1, 'foo': 42}   
     f = open(filename, 'w')      
@@ -16,8 +13,7 @@ def sample_file_write(filename):
     f.close()                   
 
 def sample_file_read(filename):
-    """A function that demonstrates how to read a
-       Python dictionary from a file.
+    """A function that reads Python dictionary from a file
     """
     f = open(filename, 'r')    
     d_str = f.read()           
@@ -29,7 +25,8 @@ def sample_file_read(filename):
     print(d)
     
 def stem(s):
-        """accepts string; return stem/root of s exclude prefixes and suffixes"""
+        """accepts string and returns stem/root of s excluding prefixes and suffixes
+        """
         special=['s']
         one_singular=['y','e','a']
         singular=['on','er','us','en','st']
@@ -52,7 +49,6 @@ def stem(s):
                         return s[3:]
                 if s[-2:-1] in one_singular:
                         return s[:-2]
-
                 else:
                         return s[:-1]
         if len(s)>=3:
@@ -82,7 +78,8 @@ def stem(s):
 
 
 def compare_dictionaries(d1, d2):
-        """ compute and return their log similarity score."""
+        """ compute and return log similarity score
+        """
         score=0
         count=0
         total=len(d1)
@@ -100,10 +97,9 @@ def compare_dictionaries(d1, d2):
 class TextModel:
     def __init__(self, model_name):
         """model_name :string
-            Attributes: name-string label for text model
-                        words-dictionary that records # times each word appears in text
-                        word_lengths-dictionary records # of times each word length appears
-
+            Attributes: name = string label for text model
+                        words = dictionary that records # times each word appears in text
+                        word_lengths = dictionary records # of times each word length appears
         """
         self.name=model_name
         self.words={}
@@ -113,7 +109,8 @@ class TextModel:
         self.three_adjacent={}
 
     def max_adjacent(self):
-        """helper to find the most frequent adjacent words in self.three_adjacent"""
+        """helper to find the most frequent adjacent words in self.three_adjacent
+        """
         frequency=0
         sequence=''
         for a in self.three_adjacent:
@@ -189,8 +186,7 @@ class TextModel:
     def save_model(self):
         """saves the TextModel object self by writing its various feature
         dictionaries to files. There will be one file written for each
-        feature dictionary. For now, you just need to handle the words and
-        word_lengths dictionaries
+        feature dictionary. For now, handling the words and word_lengths dictionaries
         """
         dic1=self.name+'_'+'words'
         dic2=self.name+'_'+'word_lengths'
@@ -253,9 +249,8 @@ class TextModel:
     def similarity_scores(self,other):
         """returns a list of log similarity scores measuring the
         similarity of self and other – one score for each type of
-        feature (words, word lengths, stems, sentence lengths, and your
-        additional feature). You should make repeated calls to
-        compare_dictionaries, and put the resulting scores in a list
+        feature (words, word lengths, stems, sentence lengths, and
+        additional feature). Made repeated calls to compare_dictionaries, and put the resulting scores in a list
         that the method returns.
         """
         scores=[]
@@ -293,7 +288,6 @@ class TextModel:
 
 ###Testing###
 def test():
-    """ your docstring goes here """
     source1 = TextModel('source1')
     source1.add_string('It is interesting that she is interested.')
 
